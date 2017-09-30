@@ -4,7 +4,7 @@ CLS: LOCATE 1, 1: INPUT "number of frames per second ->", fps%
 CLS: LOCATE 1, 1: INPUT "frame width ->", fwidth%
 CLS: LOCATE 1, 1: INPUT "frame height ->", fhight%
 IF imageNo% = 0 THEN END ELSE BMP$ = "1"
-IF imageNo% = 1 THEN BMP$ = LTRIM$(RTRIM$(STR$(imageNo%)))
+IF imageNo% = 1 THEN BMP$ = STR$(imageNo%)
 CLS: LOCATE 1, 1: INPUT "enter alpha level -> ", ALPHA$
 ALPHA$ = LTRIM$(RTRIM$("&H" + HEX$(VAL(ALPHA$))))
 IF VAL(ALPHA$) < &H00 OR VAL(ALPHA$) > &HFF THEN END
@@ -20,7 +20,7 @@ FOR FileNo% = 1 TO imageNo%
     OPEN LTRIM$(RTRIM$((STR$(FileNo%)))) + ".BAS" FOR OUTPUT AS #2
     PRINT #1, LTRIM$(RTRIM$("'$INCLUDE:'")) + LTRIM$(RTRIM$((STR$(FileNo%)))) + LTRIM$(RTRIM$(".BAS" + "'"))
     BMP$ = LTRIM$(RTRIM$(STR$(FileNo%)))
-    IF imageNo% = 1 THEN BMP$ = LTRIM$(RTRIM$(STR$(imageNo%)))
+    IF imageNo% = 1 THEN BMP$ = STR$(imageNo%)
     FILE$ = UCASE$(BMP$) + ".bmp"
     HANDLE = _LOADIMAGE(FILE$)
     _PUTIMAGE (0, 0), HANDLE, 0
